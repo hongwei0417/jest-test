@@ -6,8 +6,8 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test",
-    "testw": "ng test --watch-all",
+    "test": "ng test --verbose",
+    "testw": "ng test --watch-all --verbose",
     "coverage": "ng test --coverage"
   },
   "private": true,

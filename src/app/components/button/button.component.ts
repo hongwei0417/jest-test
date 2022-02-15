@@ -6,10 +6,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./button.component.scss']
 })
 export class ButtonComponent implements OnInit {
+  data: any;
 
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  change(): void {
+    this.data = "123";
   }
 
 }
