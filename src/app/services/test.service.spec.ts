@@ -7,6 +7,7 @@ import { TestBed } from '@angular/core/testing';
 
 import { TestService } from './test.service';
 import { HttpClient } from '@angular/common/http';
+import { of } from 'rxjs';
 
 describe('TestService', () => {
   let service: TestService;
@@ -81,6 +82,34 @@ describe('TestService', () => {
 
     it('檢查value是否被改變', () => {
       expect(service.value).toBe(0);
+    });
+  });
+
+  it('測試 Spy HttpClient', (done) => {
+    const spy = jest.spyOn(httpClient, 'get');
+    spy.mockReturnValue(of(123));
+    service.callHttpClient().subscribe((data) => {
+      expect(data).toBe(123);
+      done();
+    });
+  });
+});
+
+describe('Mock HttpClient', () => {
+  let service: TestService;
+  let httpClientSpy = { get: jest.fn() };
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      providers: [{ provide: HttpClient, useValue: httpClientSpy }],
+    });
+    service = TestBed.inject(TestService);
+  });
+
+  it('測試 Mock HttpClient', (done) => {
+    httpClientSpy.get.mockReturnValue(of(123));
+    service.callHttpClient().subscribe((data) => {
+      expect(data).toBe(123);
+      done();
     });
   });
 });

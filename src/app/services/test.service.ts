@@ -8,7 +8,7 @@ import { from, mapTo, of, throwError } from 'rxjs';
 export class TestService {
   value = 0;
 
-  constructor(private httpClient: HttpClient) {}
+  constructor(public httpClient: HttpClient) {}
 
   getValue(): string {
     return 'Good';
@@ -20,6 +20,10 @@ export class TestService {
 
   fetchError() {
     return this.httpClient.get('https://abc').pipe(throwError);
+  }
+
+  callHttpClient() {
+    return this.httpClient.get('https://abc');
   }
 
   doWithCondition(value: number) {
